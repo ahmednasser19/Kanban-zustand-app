@@ -29,7 +29,7 @@ export default function Column({ state }) {
         e.preventDefault();
       }}
       onDrop={(e) => {
-        console.log("draggedTask", draggedTask);
+        // console.log("draggedTask", draggedTask);
         moveTask(draggedTask, state);
         setDraggedTask(null);
         setDrop(false);
