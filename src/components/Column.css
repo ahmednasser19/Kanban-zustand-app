@@ -7,11 +7,12 @@
   margin: 0 0.5rem;
   border-radius: 4px;
   padding: 0.5rem;
-  border: dashed transparent 4px;
+  border: dashed transparent 3px;
 }
 
 .column.drop {
-  border-color: white;
+  /* border-color: white; */
+  border: dashed white 2px;
 }
 
 .titleWrapper {
@@ -46,7 +47,7 @@
 .modalContent {
   background: white;
   position: absolute;
-  z-in  dex: 1;
+  z-index: 1;
   padding: 1rem;
   height: 5rem;
   width: 20rem;

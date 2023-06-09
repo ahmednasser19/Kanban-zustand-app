@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useStore } from "../store";
 import "./Column.css";
 import Task from "./Task";
@@ -6,6 +7,7 @@ import { useMemo, useState } from "react";
 export default function Column({ state }) {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
+  const [drop, setDrop] = useState(false);
 
   const tasks = useStore((store) => store.tasks);
 
@@ -15,9 +17,28 @@ export default function Column({ state }) {
     [tasks, state]
   );
   const addTask = useStore((store) => store.addTask);
+  const setDraggedTask = useStore((store) => store.setDraggedTask);
+  const draggedTask = useStore((store) => store.draggedTask);
+  const moveTask = useStore((store) => store.moveTask);
 
   return (
-    <div className="column">
+    <div
+      className={classNames("column", { drop: drop })}
+      onDragOver={(e) => {
+        setDrop(true);
+        e.preventDefault();
+      }}
+      onDrop={(e) => {
+        console.log("draggedTask", draggedTask);
+        moveTask(draggedTask, state);
+        setDraggedTask(null);
+        setDrop(false);
+      }}
+      onDragLeave={(e) => {
+        setDrop(false);
+        e.preventDefault();
+      }}
+    >
       <div className="titleWrapper">
         <p>{state}</p>
         <button onClick={() => setOpen(true)}>Add</button>
